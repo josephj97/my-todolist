@@ -1,0 +1,13 @@
+.l-email {
+    position: relative;
+}
+
+.l-password {
+    position: relative;
+}
+
+.l-icon {
+    position: absolute;
+    right: 1.7rem;
+    top: 19%;
+}
