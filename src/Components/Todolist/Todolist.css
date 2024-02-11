@@ -1,0 +1,9 @@
+.card {
+    background: #ECD581;
+    margin: auto;
+    border-radius: 5rem;
+    cursor: pointer;
+    color: black;
+    width: 18rem;
+    height: 8rem;
+}

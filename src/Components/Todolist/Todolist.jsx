@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import './Todolist.css'
 
 const Todolist = () => {
     const [todolist, setTodolist] = useState();
@@ -13,7 +14,7 @@ const Todolist = () => {
     });
 
     return (
-        <div className='container'>
+        <div className='container paddings innerWidth flexCenter'>
             {todolist && todolist.map(todo => {
                 const { id, title, completed } = todo
                 return (
