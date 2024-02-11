@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Todolist from '../Todolist/Todolist';
+import TodoItem from '../TodoItem/TodoItem';
 
 function Dashboard() {
     return (
@@ -8,7 +9,7 @@ function Dashboard() {
             <Router>
                 <Routes>
                     <Route exact path="/" element={<Todolist />} />
-                    {/* <Route exact path="/todos/:id" children={<TodoItem />} /> */}
+                    <Route exact path="/todos/:id" element={<TodoItem />} />
                 </Routes>
             </Router>
         </div>
