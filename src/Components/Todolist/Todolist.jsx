@@ -8,21 +8,18 @@ const Todolist = () => {
     const [todolist, setTodolist] = useState();
     useEffect(() => {
         axios.get(`https://jsonplaceholder.typicode.com/todos`).then((res) => {
-            const responseTodolist = res.data;
-            setTodolist(responseTodolist);
+            setTodolist(res.data);
+
         })
     });
 
-    const toggleComplete = id => {
-        setTodolist(todolist.map(todo => todo.id === id ? { ...todo, completed: !todo.completed } : todo))
-    }
 
     return (
         <div>
-            {todolist && todolist.map((todo, index) => {
+            {todolist && todolist.map((todo) => {
                 return (
                     <div>
-                        <TodoCard todo={todo} key={index} toggleComplete={toggleComplete} />
+                        <TodoCard todo={todo} />
                     </div>
                 )
             })}
