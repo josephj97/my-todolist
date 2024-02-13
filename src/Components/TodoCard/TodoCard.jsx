@@ -3,7 +3,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { useNavigate } from "react-router-dom";
 import './TodoCard.css';
 
-const TodoCard = ({ todo, toggleComplete }) => {
+const TodoCard = ({ todo }) => {
     const { id, title, completed } = todo;
     const [isChecked, setIsChecked] = useState(completed);
     let navigate = useNavigate();
