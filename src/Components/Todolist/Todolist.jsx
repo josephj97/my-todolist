@@ -7,8 +7,8 @@ import TodoCard from '../TodoCard/TodoCard';
 const Todolist = () => {
     const [todolist, setTodolist] = useState();
     useEffect(() => {
-        axios.get(`https://jsonplaceholder.typicode.com/todos`).then((res) => {
-            setTodolist(res.data);
+        axios.get(`http://localhost:3000/api/v1/todo`).then((res) => {
+            setTodolist(res.data.todos);
 
         })
     });
@@ -18,7 +18,7 @@ const Todolist = () => {
         <div>
             {todolist && todolist.map((todo) => {
                 return (
-                    <div key={todo.id}>
+                    <div key={todo._id}>
                         <TodoCard todo={todo} />
                     </div>
                 )
