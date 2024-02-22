@@ -1,0 +1,7 @@
+.form-container {
+    justify-content: space-around;
+}
+
+.fields {
+    gap: 0.2rem;
+}

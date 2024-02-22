@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './TodoForm.css'
 
 const TodoForm = () => {
     const [titleValue, setTitleValue] = useState('');
@@ -39,11 +40,10 @@ const TodoForm = () => {
 
     return (
         <div >
-            <form onSubmit={handleSubmit} className='innerWidth paddings flexCenter form-container'>
-                <label>
-                    Input:
-                    <input type="text" value={titleValue} onChange={handleTitle} />
-                    <input type="text" value={descriptionValue} onChange={handleDescription} />
+            <form onSubmit={handleSubmit} className='form-container innerWidth paddings flexCenter'>
+                <label className='flexColCenter fields'>
+                    <input type="text" value={titleValue} onChange={handleTitle} placeholder='Title' />
+                    <input type="text" value={descriptionValue} onChange={handleDescription} placeholder='Description' />
                 </label>
                 <button type='submit'>Add Task</button>
             </form>
