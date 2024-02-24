@@ -3,13 +3,12 @@ import Checkbox from '@mui/material/Checkbox';
 import { useNavigate } from "react-router-dom";
 import './TodoCard.css';
 import axios from 'axios';
-import { Trash } from "react-bootstrap-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 
 
-const TodoCard = ({ todo, deleteTodo }) => {
+const TodoCard = ({ todo, deleteTodo, editTodo }) => {
     const { _id, title, description, isCompleted } = todo;
     const [isChecked, setIsChecked] = useState(isCompleted);
     let navigate = useNavigate();
@@ -30,6 +29,10 @@ const TodoCard = ({ todo, deleteTodo }) => {
         deleteTodo(id);
     }
 
+    const handleEdit = (id) => {
+        editTodo(id);
+    }
+
     return (
         <div className="container innerWidth flexColStart paddings">
             <div className='card'>
@@ -43,6 +46,7 @@ const TodoCard = ({ todo, deleteTodo }) => {
                 <div className="right">
                     <Checkbox className='flexEnd' checked={isChecked} onChange={(event) => handleCheckboxChange(event, _id)} />
                     <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(_id)} />
+                    <FontAwesomeIcon icon={faPenToSquare} onClick={() => handleEdit(_id)} />
                 </div>
 
 
