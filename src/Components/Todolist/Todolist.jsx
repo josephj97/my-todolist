@@ -28,7 +28,7 @@ const Todolist = () => {
     const updateTodo = (updatedTodo) => {
         axios.put(`http://localhost:3000/api/v1/todo/${updatedTodo._id}`, {
             title: updatedTodo.title,
-            desription: updatedTodo.description
+            description: updatedTodo.description
         })
             .then(res => {
                 console.log('Todo updated successfully:', res.data);
