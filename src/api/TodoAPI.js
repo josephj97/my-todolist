@@ -21,3 +21,12 @@ export const updateTodo = (onSuccess, updatedTodo) => {
         onSuccess(response)
     })
 }
+
+export const completeTodo = (onSuccess, event, id) => {
+    const newIsChecked = event.target.checked
+    axios.put(`${endpoint}todo/${id}`, {
+        isCompleted: newIsChecked
+    }).then((response) => {
+        onSuccess(response)
+    })
+}

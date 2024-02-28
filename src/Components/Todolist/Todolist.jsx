@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import './Todolist.css'
 import TodoCard from '../TodoCard/TodoCard';
 import EditTodoForm from '../EditTodoForm/EditTodoForm';
@@ -44,6 +43,16 @@ const Todolist = () => {
         setEditingTodoId(id);
     }
 
+    const toggleCheckbox = (event, id) => {
+        Apis.completeTodo(
+            (response) => {
+                console.log(response.data)
+            }, event, id),
+            () => {
+                alert('Error')
+            }
+    }
+
     return (
         <div>
             {todolist && todolist.map((todo) => {
@@ -51,7 +60,7 @@ const Todolist = () => {
                     todo._id === editingTodoId ? (
                         <EditTodoForm key={todo._id} todo={todo} onUpdate={updateTodo} />
                     ) : (
-                        <TodoCard key={todo._id} todo={todo} deleteTodo={deleteTodo} editTodo={editTodo} />
+                        <TodoCard key={todo._id} todo={todo} deleteTodo={deleteTodo} editTodo={editTodo} toggleCheckbox={toggleCheckbox} />
                     )
 
                 )

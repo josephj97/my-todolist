@@ -8,22 +8,15 @@ import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 
 
-const TodoCard = ({ todo, deleteTodo, editTodo }) => {
+const TodoCard = ({ todo, deleteTodo, editTodo, toggleCheckbox }) => {
     const { _id, title, description, isCompleted } = todo;
     const [isChecked, setIsChecked] = useState(isCompleted);
     let navigate = useNavigate();
 
     const handleCheckboxChange = (event, id) => {
-        const newIsChecked = event.target.checked
-        setIsChecked(newIsChecked);
-        axios.put(`http://localhost:3000/api/v1/todo/${id}`, {
-            isCompleted: newIsChecked
-        }).then(response => {
-            console.log(response.data);
-        }).catch(error => {
-            console.error(error);
-        })
-    };
+        setIsChecked(event.target.checked);
+        toggleCheckbox(event, id);
+    }
 
     const handleDelete = (id) => {
         deleteTodo(id);
@@ -44,7 +37,7 @@ const TodoCard = ({ todo, deleteTodo, editTodo }) => {
                     <h6>{description}</h6>
                 </div>
                 <div className="right">
-                    <Checkbox className='flexEnd' checked={isChecked} onChange={(event) => handleCheckboxChange(event, _id)} />
+                    <Checkbox className='flexEnd' checked={isChecked} onClick={(event) => handleCheckboxChange(event, _id)} />
                     <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(_id)} />
                     <FontAwesomeIcon icon={faPenToSquare} onClick={() => handleEdit(_id)} />
                 </div>
