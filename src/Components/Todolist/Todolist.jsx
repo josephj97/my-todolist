@@ -3,41 +3,41 @@ import axios from 'axios';
 import './Todolist.css'
 import TodoCard from '../TodoCard/TodoCard';
 import EditTodoForm from '../EditTodoForm/EditTodoForm';
-
+import * as Apis from '../../api/TodoAPI'
 
 const Todolist = () => {
     const [todolist, setTodolist] = useState([]);
     const [editingTodoId, setEditingTodoId] = useState(null);
-    useEffect(() => {
-        axios.get(`http://localhost:3000/api/v1/todo`).then((res) => {
-            setTodolist(res.data.todos);
 
-        })
+    useEffect(() => {
+        Apis.getAllTodos(
+            (response) => {
+                setTodolist(response.data.todos);
+            }),
+            () => {
+                alert('Error')
+            }
     });
 
-    const deleteTodo = async (id) => {
-        try {
-            await axios.delete(`http://localhost:3000/api/v1/todo/${id}`);
-            console.log(`Item is deleted: ${id}`)
-            setTodolist(todolist.filter(todo => todo.id !== id));
-        } catch (error) {
-            console.log("Can't delete")
-        }
+    const deleteTodo = (id) => {
+        Apis.deleteTodo(
+            (id) => {
+                setTodolist(todolist.filter(todo => todo.id !== id));
+            }, id),
+            () => {
+                alert('Error')
+            }
     };
 
     const updateTodo = (updatedTodo) => {
-        axios.put(`http://localhost:3000/api/v1/todo/${updatedTodo._id}`, {
-            title: updatedTodo.title,
-            description: updatedTodo.description
-        })
-            .then(res => {
-                console.log('Todo updated successfully:', res.data);
-                setTodolist(todolist.map(todo => (todo._id === updatedTodo._id ? res.data : todo)));
+        Apis.updateTodo(
+            (response) => {
+                setTodolist(todolist.map(todo => (todo._id === updatedTodo._id ? response.data : todo)));
                 setEditingTodoId(null);
-            })
-            .catch(error => {
-                console.error('Error updating todo:', error)
-            })
+            }, updatedTodo),
+            () => {
+                alert('Error')
+            }
     }
 
     const editTodo = (id) => {
